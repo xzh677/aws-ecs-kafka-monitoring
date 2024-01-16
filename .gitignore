@@ -1,0 +1,25 @@
+# Terraform files
+.terraform/
+
+# Local .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# .tfvars files
+*.tfvars
+
+# .tfplan files
+*.tfplan
+
+# ignore local variables
+.env
+
+# ignore temp file
+*.tmp.*
+
+# ignore terraform lock
+# you probably want to keep it
+infra/.terraform.lock.hcl

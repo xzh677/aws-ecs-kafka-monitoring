@@ -1,0 +1,14 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: {{PROMETHEUS_URL}}
+    basicAuth: true
+    uid: "RIJIVXISk"
+    basicAuthUser: admin
+    basicAuthPassword: test
+    secureJsonData:
+      basicAuthPassword: test
+    isDefault: true

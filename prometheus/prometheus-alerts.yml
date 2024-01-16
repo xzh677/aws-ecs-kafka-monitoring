@@ -1,0 +1,14 @@
+groups:
+- name: Kafka_Alerts
+  rules:
+  - alert: Too Many Partitions on Test Cluster
+    expr: (confluent_kafka_server_partition_count{kafka_id="lkc-6gkx38"} offset 5m) > 10
+    for: 1m
+    labels:
+      severity: critical
+      severity_level: 4
+      category: "confluent-cloud"
+      alarm_id: 1001
+    annotations:
+      summary: "Too Many Partitions on Test Cluster {{ $labels.kafka_id }} "
+      description: "Partitions"

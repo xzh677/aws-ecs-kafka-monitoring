@@ -1,0 +1,16 @@
+flowchart LR
+    vpc[Network: VPC] --> alb[ALB: Load Balancer]
+    vpc --> sg_alb[SG: ALB]
+    alb --> sg_ecs[SG: ECS UseCase]
+    alb --> alb_l[ALB: ALB listener]
+    vpc --> tgt_g[TargetGroup: UseCase]
+    tgt_g --> alb_rg[ALB: Rule: UseCase]
+    alb_l --> alb_rg
+    alb --> rt53_g[Route53: UseCase]
+    ecr_g[ECR Repo: UseCase] --> td_g[ECS: Task Definition: UseCase]
+    cw_log[Cloudwatch: LogGroup] --> td_g
+    irole[IAM: ECS Role] --> td_g
+    td_g --> svc_g[ECS Service: UseCase]
+    vpc --> svc_g
+    tgt_g --> svc_g
+    sg_ecs --> svc_g
