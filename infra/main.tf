@@ -18,6 +18,28 @@ provider "aws" {
 ##                             
 ################################################################################
 
+################################################################################
+## Infra: Confluent Cloud Secrets
+################################################################################
+resource "aws_secretsmanager_secret" "cc_api_key" {
+  name        = "${var.resource_prefix}-cc-api-key-${var.secret_name_suffix}"
+  description = "CC API KEY"
+}
+
+resource "aws_secretsmanager_secret_version" "cc_api_key_version" {
+  secret_id     = aws_secretsmanager_secret.cc_api_key.id
+  secret_string = var.prometheus_confluent_cloud_api_key
+}
+
+resource "aws_secretsmanager_secret" "cc_api_secret" {
+  name        = "${var.resource_prefix}-t-cc-api-secret-${var.secret_name_suffix}"
+  description = "CC API KEY"
+}
+
+resource "aws_secretsmanager_secret_version" "cc_api_secret_version" {
+  secret_id     = aws_secretsmanager_secret.cc_api_secret.id
+  secret_string = var.prometheus_confluent_cloud_api_secret
+}
 
 ################################################################################
 ## Infra: VPC and Subnets
@@ -163,6 +185,7 @@ resource "aws_ecs_task_definition" "prometheus" {
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = aws_iam_role.ecs_task_execution_role.arn
   cpu                      = var.prometheus_cpu
   memory                   = var.prometheus_mem
 
@@ -188,6 +211,28 @@ resource "aws_ecs_task_definition" "prometheus" {
           "awslogs-stream-prefix" = "${var.resource_prefix}-prometheus-log-stream"
         }
       }
+      environment = [
+        {
+          name  = "CONFLUENT_CLOUD_API_KEY",
+          value = "${aws_secretsmanager_secret_version.cc_api_key_version.secret_string}"
+        },
+        {
+          name  = "CONFLUENT_CLOUD_API_SECRET",
+          value = "${aws_secretsmanager_secret_version.cc_api_secret_version.secret_string}"
+        },
+        {
+          name  = "PROMETHEUS_ALERTMANAGER_URL",
+          value = "${var.prometheus_alertmanager_url}"
+        },
+        {
+          name  = "PROMETHEUS_ADMIN_PASSWORD",
+          value = "${var.prometheus_admin_password}"
+        },
+        {
+          name  = "PROMETHEUS_DEBUG",
+          value = "true"
+        }
+      ]
     }
   ])
 }
@@ -253,6 +298,8 @@ resource "aws_ecs_service" "prometheus_service" {
   desired_count   = 1
   launch_type     = "FARGATE"
 
+  enable_execute_command = true
+
   load_balancer {
     target_group_arn = aws_alb_target_group.prometheus_target_group.arn
     container_name   = "prometheus"
@@ -263,6 +310,10 @@ resource "aws_ecs_service" "prometheus_service" {
     security_groups  = [aws_security_group.sg_ecs_prometheus.id]
     subnets          = module.vpc.private_subnets
     assign_public_ip = false
+
+    # security_groups  = []
+    # subnets          = module.vpc.public_subnets
+    # assign_public_ip = true
   }
 }
 
@@ -350,6 +401,16 @@ resource "aws_ecs_task_definition" "grafana" {
           "awslogs-stream-prefix" = "${var.resource_prefix}-grafana-log-stream"
         }
       }
+      environment = [
+        {
+          name  = "GRAFANA_PROMETHEUS_URL",
+          value = "${var.grafana_prometheus_url}"
+        },
+        {
+          name  = "GRAFANA_ADMIN_PASSWORD",
+          value = "${var.grafana_admin_password}"
+        }
+      ]
     }
   ])
 }
@@ -510,6 +571,12 @@ resource "aws_ecs_task_definition" "alertmanager" {
           "awslogs-stream-prefix" = "${var.resource_prefix}-prometheus-log-stream"
         }
       }
+      environment = [
+        {
+          name  = "ALERTMANAGER_WEBHOOK_URL",
+          value = "${var.alertmanager_webhook_url}"
+        }
+      ]
     }
   ])
 }

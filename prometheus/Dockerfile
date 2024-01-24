@@ -1,5 +1,14 @@
 FROM prom/prometheus:latest
-COPY prometheus.tmp.yml /etc/prometheus/prometheus.yml
-COPY web.yml /etc/prometheus/web.yml
+
+USER root
+
+RUN mkdir /etc/prometheus/conf-templates
+
+COPY prometheus.yml /etc/prometheus/conf-templates/prometheus.tmp.yml
+COPY web.yml /etc/prometheus/conf-templates/web.tmp.yml
 COPY prometheus-alerts.yml /etc/prometheus/prometheus-alerts.yml
-ENTRYPOINT ["/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus", "--web.console.libraries=/usr/share/prometheus/console_libraries", "--web.console.templates=/usr/share/prometheus/consoles", "--web.config.file=/etc/prometheus/web.yml"]
+
+COPY start.sh /start.sh
+RUN chmod 0755 /start.sh
+
+ENTRYPOINT ["/bin/sh", "/start.sh"]

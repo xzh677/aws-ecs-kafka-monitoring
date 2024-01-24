@@ -1,13 +1,13 @@
 global:
   scrape_interval: 2m
   scrape_timeout: 1m
-  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  evaluation_interval: 30s # Evaluate rules every 30 seconds. The default is every 1 minute.
 
 alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          - {{ALERTMANAGER_URL}}
+          - {{PROMETHEUS_ALERTMANAGER_URL}}
 rule_files:
   - /etc/prometheus/prometheus-alerts.yml
 
@@ -18,8 +18,8 @@ scrape_configs:
         - api.telemetry.confluent.cloud
     scheme: https
     basic_auth:
-      username: '{{CONFLUENT_CLOUD_API_KEY}}'
-      password: '{{CONFLUENT_CLOUD_API_SECRET}}'
+      username: {{CONFLUENT_CLOUD_API_KEY}}
+      password: {{CONFLUENT_CLOUD_API_SECRET}}
     metrics_path: /v2/metrics/cloud/export
     params:
       "resource.kafka.id":
@@ -30,5 +30,3 @@ scrape_configs:
         - lksqlc-pkyr65
       "resource.schema_registry.id":
         - lsrc-x1gxg
-      "resource.connector.id":
-        - lcc-378gmo

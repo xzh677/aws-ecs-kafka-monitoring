@@ -35,13 +35,27 @@ make ecr-alertmanager
 ```
 or
 ```
-make ecr-buildAndPush
+make ecr-all
 ```
 
-## 4. Destroy all resources
+## 4. Login into the services
+
+http://prometheus.{{your_domain}}
+with username `admin` and password `test`.
+
+http://grafana.{{your_domain}}
+with username `admin` and password `test`.
+
+## 5. Destroy all resources
 ```
 make tf-destroy
 ```
+
+# Notes:
+
+Please be aware that Confluent Telemetry has a data latency of about 5 minutes.
+
+[https://api.telemetry.confluent.cloud/docs#section/Client-Considerations-and-Best-Practices/Metric-Data-Latency](https://api.telemetry.confluent.cloud/docs#section/Client-Considerations-and-Best-Practices/Metric-Data-Latency)
 
 # Reference: 
 
