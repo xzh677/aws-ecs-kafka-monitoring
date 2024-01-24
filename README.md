@@ -6,7 +6,7 @@ A Confluent Cloud monitoring stack on AWS ECS.
 
 ![high-level diagram](assets/highlevel-diagram.png)
 
-# Terraform Components depdency diagram
+# Terraform Components Dependency Diagram
 ![components diagram](assets/dependency-graph-tf-components.png)
 
 
@@ -50,6 +50,10 @@ with username `admin` and password `test`.
 ```
 make tf-destroy
 ```
+
+# Future Changes
+- EFS mount for Prometheus and Grafana
+- Fetch secrets from AWS Secret Manager
 
 # Notes:
 
