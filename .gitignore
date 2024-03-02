@@ -19,6 +19,7 @@ crash.log
 
 # ignore temp file
 *.tmp.*
+tmp
 
 # ignore terraform lock
 # you probably want to keep it

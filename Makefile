@@ -72,13 +72,24 @@ ecr-alertmanager:
 
 ecr-all: ecr-grafana ecr-prometheus ecr-alertmanager
 
-ecr-local:
-	cd prometheus && \
-	docker build . -t $(AWS_ECR_REGISTRY)/$(PROMETHEUS_REPO):$(PROMETHEUS_VERSION)
-	docker run --rm -p 9090:9090 \
-		-e 'PROMETHEUS_ADMIN_PASSWORD=$(PROMETHEUS_ADMIN_PASSWORD)' \
-		-e "CONFLUENT_CLOUD_API_KEY=$(CONFLUENT_CLOUD_API_KEY)" \
-		-e "CONFLUENT_CLOUD_API_SECRET=$(CONFLUENT_CLOUD_API_SECRET)" \
-		-e "PROMETHEUS_ALERTMANAGER_URL=$(PROMETHEUS_ALERTMANAGER_URL)" \
-		-e "PROMETHEUS_DEBUG=true" \
-	$(AWS_ECR_REGISTRY)/$(PROMETHEUS_REPO):$(PROMETHEUS_VERSION)
+docker-build:
+	cd prometheus && docker build . -t $(PROMETHEUS_REPO):$(PROMETHEUS_VERSION)
+	cd grafana && docker build . -t $(GRAFANA_REPO):$(GRAFANA_VERSION)
+	cd alertmanager && docker build . -t $(ALERTMANAGER_REPO):$(ALERTMANAGER_VERSION)
+
+docker-run:
+	@mkdir -p tmp
+	@sed -e "s#{{PROMETHEUS_REPO}}#$(PROMETHEUS_REPO)#g" \
+		-e "s#{{PROMETHEUS_VERSION}}#$(PROMETHEUS_VERSION)#g" \
+		-e "s#{{CONFLUENT_CLOUD_API_KEY}}#$(CONFLUENT_CLOUD_API_KEY)#g" \
+		-e "s#{{CONFLUENT_CLOUD_API_SECRET}}#$(CONFLUENT_CLOUD_API_SECRET)#g" \
+		-e "s#{{PROMETHEUS_ALERTMANAGER_URL}}#$(PROMETHEUS_ALERTMANAGER_URL)#g" \
+		-e "s#{{GRAFANA_REPO}}#$(GRAFANA_REPO)#g" \
+		-e "s#{{GRAFANA_VERSION}}#$(GRAFANA_VERSION)#g" \
+		-e "s#{{GRAFANA_ADMIN_PASSWORD}}#$(GRAFANA_ADMIN_PASSWORD)#g" \
+		docker-compose.tpl.yml > tmp/docker-compose.yml
+	
+	@cd tmp && docker-compose up
+
+docker-delete:
+	@cd tmp && docker-compose down

@@ -1,0 +1,1444 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 2,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 42,
+        "panels": [],
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "ksqlDB",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The count of Confluent Streaming Units (CSUs) for this KSQL instance. The count is sampled every 60 seconds. The implicit time aggregation for this metric is MAX.\n\n# TYPE confluent_kafka_ksql_streaming_unit_count gauge",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 7,
+          "x": 0,
+          "y": 1
+        },
+        "id": 44,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "",
+            "url": "https://docs.confluent.io/cloud/current/ksqldb/overview.html#pricing-for-ksql-cloud-in-ccloud"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "exemplar": true,
+            "expr": "confluent_kafka_ksql_streaming_unit_count",
+            "interval": "",
+            "legendFormat": "{{ksql_id}}",
+            "queryType": "randomWalk",
+            "refId": "A"
+          }
+        ],
+        "title": "ksqlDB Streaming Unit Count",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 5,
+          "x": 7,
+          "y": 1
+        },
+        "id": 45,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "expr": "count(confluent_kafka_ksql_streaming_unit_count)",
+            "interval": "",
+            "legendFormat": "",
+            "queryType": "randomWalk",
+            "refId": "A"
+          }
+        ],
+        "title": "ksqlDB application count",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The total storage utilization for a given ksqlDB application. Storage utilization is a metric that measures the % of available storage that ksqlDB has used to store state for stateful queries like aggregations and joins. If this value reaches 100% (1.0) ksqlDB will not be able to continue to process records because it does not have available storage space to maintain state.\n\nTYPE confluent_kafka_ksql_task_stored_bytes gauge",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percentunit",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "id": 60,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "",
+            "url": "https://docs.confluent.io/cloud/current/ksqldb/monitoring-ksqldb.html#storage-utilization"
+          }
+        ],
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "confluent_kafka_ksql_storage_utilization{ksql_id=~\"$ksql_id\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ksql_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Total Storage Utilization",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The maximum saturation for a given ksqlDB query across all nodes. Returns a value between 0 and 1, a value close to 1 indicates that ksqlDB query processing is bottlenecked on available resources.\n\nQuery saturation measures the percentage of time a query-processing thread spends processing records, for example serializing/deserializing, evaluating expressions, and reading/writing state for aggregations and joins. When a query processing thread is not doing work, it’s waiting for new records to process, so if a query-processing thread is almost always busy, it likely can’t keep up with its source topic partitions. \n\nTYPE confluent_kafka_ksql_query_saturation gauge",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percentunit",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 9
+        },
+        "id": 57,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "",
+            "url": "https://docs.confluent.io/cloud/current/ksqldb/monitoring-ksqldb.html#query-saturation"
+          }
+        ],
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "confluent_kafka_ksql_query_saturation{ksql_id=~\"$ksql_id\", query_id=~\"$query_id\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ksql_id}}|{{query_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "ksqlDB Query Saturation",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The size of a given task's state stores in bytes.\n\nTYPE confluent_kafka_ksql_task_stored_bytes gauge",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "decbytes",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 9
+        },
+        "id": 61,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "topk(10, confluent_kafka_ksql_task_stored_bytes{ksql_id=~\"$ksql_id\", query_id=~\"$query_id\", ksql_node_id=~\"$ksql_node_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ksql_id}}|{{query_id}}|{{ksql_node_id}}|{{task_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "ksqlDB Task Stored Bytes",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 17
+        },
+        "id": 62,
+        "panels": [],
+        "title": "Consumptions",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The lag between a group member's committed offset and the partition's high watermark.\n\nConsumer group lag measures the difference between the current processing offset and the latest offset for each source topic partition a query consumes. While this value may occasionally spike, consumer lag that’s consistently growing indicates the ksqlDB may not be able to keep up with records as they’re being appended to the topics that a query consumes from.\n\nTYPE confluent_kafka_server_consumer_lag_offsets gauge",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "id": 63,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "",
+            "url": "https://docs.confluent.io/cloud/current/ksqldb/monitoring-ksqldb.html#consumer-group-lag"
+          }
+        ],
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "topk(10, max by (consumer_group_id) (confluent_kafka_server_consumer_lag_offsets{kafka_id=~\"$kafka_id\", topic=~\"$topic\", consumer_group_id=~\"$group\"}))",
+            "instant": false,
+            "legendFormat": "{{consumer_group_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Consumer Group Lag",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 16,
+        "panels": [],
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "Topics",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The current count of bytes retained by the cluster, summed across all partitions. The count is sampled every 60 seconds.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes",
+            "unitScale": true
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byValue",
+                "options": {
+                  "op": "gte",
+                  "reducer": "allIsZero",
+                  "value": 0
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 27
+        },
+        "id": 52,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "sum by (kafka_id, topic) (confluent_kafka_server_retained_bytes{topic=~\"$topic\", kafka_id=~\"$kafka_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{kafka_id}}-{{topic}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Topic retained bytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The delta count of bytes received from the network. Each sample is the number of bytes received since the previous data sample. The count is sampled every 60 seconds.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 36
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "sum by (topic, kafka_id) (confluent_kafka_server_received_bytes{topic=~\"$topic\", kafka_id=~\"$kafka_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}} - {{kafka_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Topic Received Bytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The delta count of records received. Each sample is the number of records received since the previous data sample. The count is sampled every 60 seconds.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 36
+        },
+        "id": 31,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "sum by (topic, kafka_id) (confluent_kafka_server_received_records{topic=~\"$topic\", kafka_id=~\"$kafka_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}} - {{kafka_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Topic Received Record",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The delta count of bytes sent over the network. Each sample is the number of bytes sent since the previous data point. The count is sampled every 60 seconds.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 42
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "sum by (topic, kafka_id) (confluent_kafka_server_sent_bytes{topic=~\"$topic\", kafka_id=~\"$kafka_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}} - {{kafka_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Topic Sent bytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "The delta count of records sent. Each sample is the number of records sent since the previous data point. The count is sampled every 60 seconds.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 42
+        },
+        "id": 30,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "sum by (topic, kafka_id) (confluent_kafka_server_sent_records{topic=~\"$topic\", kafka_id=~\"$kafka_id\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}} - {{kafka_id}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Topic Sent Records",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "RIJIVXISk"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 16,
+          "w": 24,
+          "x": 0,
+          "y": 48
+        },
+        "id": 59,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "Show details",
+            "url": "https://docs.confluent.io/cloud/current/ksqldb/monitoring-ksqldb.html"
+          }
+        ],
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "# ksqlDB CSU\n\nA Confluent Streaming Unit is an abstract unit that represents the linearity of performance. For example, if a workload gets a certain level of throughput with 4 CSUs, you can expect about three times the throughput with 12 CSUs.\n\n- 1 CSU is the minimum.\n- 28 CSUs is the maximum.\n- Cluster sizes can be 1, 2, 4, 8, 12, 16, 20, 24, or 28 CSUs.\n- Clusters with 1 or 2 CSUs can be scaled up to 4. For clusters with 4 CSUs or more, you can scale up to 28 CSUs in 4-CSU increments.\n- Clusters with 8 or more CSUs are configured automatically for [high availability](https://docs.confluent.io/cloud/current/ksqldb/overview.html#ksqldb-high-availability).\n- High availability cannot be enabled for clusters with less than 8 CSUs.\n\n# ksqlDB Storages\nYou get 125 GB of storage space with each CSU. For 8 CSUs and higher, clusters are configured with [high availability](https://docs.confluent.io/cloud/current/ksqldb/overview.html#ksqldb-high-availability) automatically, and ksqlDB maintains replicas of your data that use half of the available storage. For 4 CSUs and 8 CSUs, you get 500 GB of user-available storage, so to expand storage past 500 GB, you must expand to at least 12 CSUs.\n\n\n|Number of CSUs | Storage | User-available storage |\n|----|----|----|\n1 | 125 GB | 125 GB |\n2 | 250 GB | 250 GB |\n4 | 500 GB | 500 GB |\n8 | 1000 GB | 500 GB* |\n12-28 | 1500 GB | 750 GB* |\n\n# ksqlDB Monitoring\n\nKey Items:\n- Processing Errors\n- Query Restarts\n- Storage Utilization\n- Consumer Group Lag\n- Query Saturation",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "RIJIVXISk"
+            },
+            "editorMode": "code",
+            "expr": "",
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Confluent Cloud ksqlDB",
+        "type": "text"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": ".*",
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_ksql_streaming_unit_count,ksql_id)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "ksqlDB Id",
+          "multi": true,
+          "name": "ksql_id",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_ksql_streaming_unit_count,ksql_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_ksql_query_saturation,query_id)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Query Id",
+          "multi": true,
+          "name": "query_id",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_ksql_query_saturation,query_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "ksql-0"
+            ],
+            "value": [
+              "ksql-0"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_ksql_task_stored_bytes,ksql_node_id)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "ksqlDB Node Id",
+          "multi": true,
+          "name": "ksql_node_id",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_ksql_task_stored_bytes,ksql_node_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "lkc-kj6xxv"
+            ],
+            "value": [
+              "lkc-kj6xxv"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_server_consumer_lag_offsets,kafka_id)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "kafka_id",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_server_consumer_lag_offsets,kafka_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "BIG_TABLE_TEST",
+              "sample_data",
+              "user_counts"
+            ],
+            "value": [
+              "BIG_TABLE_TEST",
+              "sample_data",
+              "user_counts"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_server_retained_bytes,topic)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Topic",
+          "multi": true,
+          "name": "topic",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_server_retained_bytes,topic)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "RIJIVXISk"
+          },
+          "definition": "label_values(confluent_kafka_server_consumer_lag_offsets,consumer_group_id)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Group",
+          "multi": true,
+          "name": "group",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(confluent_kafka_server_consumer_lag_offsets,consumer_group_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/_confluent-ksql.*/",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "Confluent Cloud ksqlDB",
+    "uid": "fhX5348Zk",
+    "version": 6,
+    "weekStart": ""
+  }

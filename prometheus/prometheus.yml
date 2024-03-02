@@ -24,9 +24,15 @@ scrape_configs:
     params:
       "resource.kafka.id":
         - lkc-q8kr6p
-        - lkc-6gkx38
+        - lkc-kj6xxv
+        - lkc-37xxkw
       "resource.ksql.id":
         - lksqlc-nxx0od
         - lksqlc-pkyr65
+        - lksqlc-rj88g9
       "resource.schema_registry.id":
         - lsrc-x1gxg
+      "resource.connector.id":
+        - lcc-mz99n1
+        - lcc-pj28oo
+

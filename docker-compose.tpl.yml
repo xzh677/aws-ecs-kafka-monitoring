@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  prometheus:
+    image: {{PROMETHEUS_REPO}}:{{PROMETHEUS_VERSION}}
+    container_name: prometheus
+    environment:
+      - PROMETHEUS_ADMIN_PASSWORD="$$2b$$12$$hNf2lSsxfm0.i4a.1kVpSOVyBCfIB51VRjgBUyv6kdnyTlgWj81Ay"
+      - CONFLUENT_CLOUD_API_KEY={{CONFLUENT_CLOUD_API_KEY}}
+      - CONFLUENT_CLOUD_API_SECRET={{CONFLUENT_CLOUD_API_SECRET}}
+      - PROMETHEUS_ALERTMANAGER_URL={{PROMETHEUS_ALERTMANAGER_URL}}
+      - PROMETHEUS_DEBUG=true
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./:/prometheus
+  
+  grafana:
+    image: {{GRAFANA_REPO}}:{{GRAFANA_VERSION}}
+    container_name: grafana
+    depends_on:
+      - prometheus
+    environment:
+      - GRAFANA_ADMIN_PASSWORD="$$2b$$12$$hNf2lSsxfm0.i4a.1kVpSOVyBCfIB51VRjgBUyv6kdnyTlgWj81Ay"
+      - GRAFANA_PROMETHEUS_URL=http://prometheus:9090
+      - GRAFANA_ADMIN_PASSWORD={{GRAFANA_ADMIN_PASSWORD}}
+    ports:
+      - "3000:3000"
