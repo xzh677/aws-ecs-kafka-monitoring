@@ -1,2 +1,2 @@
 basic_auth_users:
-    admin: {{PROMETHEUS_ADMIN_PASSWORD}}
+    admin:  {{PROMETHEUS_ADMIN_PASSWORD}}

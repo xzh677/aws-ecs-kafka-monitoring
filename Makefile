@@ -77,8 +77,12 @@ docker-build:
 	cd grafana && docker build . -t $(GRAFANA_REPO):$(GRAFANA_VERSION)
 	cd alertmanager && docker build . -t $(ALERTMANAGER_REPO):$(ALERTMANAGER_VERSION)
 
+
+PROMETHEUS_ADMIN_PASSWORD_ESCAPED := $(subst $$,$$$$,$(PROMETHEUS_ADMIN_PASSWORD))
+
 docker-run:
 	@mkdir -p tmp
+
 	@sed -e "s#{{PROMETHEUS_REPO}}#$(PROMETHEUS_REPO)#g" \
 		-e "s#{{PROMETHEUS_VERSION}}#$(PROMETHEUS_VERSION)#g" \
 		-e "s#{{CONFLUENT_CLOUD_API_KEY}}#$(CONFLUENT_CLOUD_API_KEY)#g" \
@@ -87,6 +91,7 @@ docker-run:
 		-e "s#{{GRAFANA_REPO}}#$(GRAFANA_REPO)#g" \
 		-e "s#{{GRAFANA_VERSION}}#$(GRAFANA_VERSION)#g" \
 		-e "s#{{GRAFANA_ADMIN_PASSWORD}}#$(GRAFANA_ADMIN_PASSWORD)#g" \
+		-e 's#{{PROMETHEUS_ADMIN_PASSWORD}}#$(PROMETHEUS_ADMIN_PASSWORD_ESCAPED)#g' \
 		docker-compose.tpl.yml > tmp/docker-compose.yml
 	
 	@cd tmp && docker-compose up
